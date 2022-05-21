@@ -215,7 +215,7 @@ impl RearrangedChainExecutor {
 
             // Now we take back the remaining upstream.
             // If there's any error in the rearrangement task, it will be thrown.
-            let remaining_upstream = upstream_poll_handle.await?;
+            let remaining_upstream = upstream_poll_handle.await.unwrap()?;
 
             // 8. Assemble the remaining messages.
             // Note that there may still be some messages in `rearranged`. However the rearranged
