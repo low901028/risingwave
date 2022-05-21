@@ -152,7 +152,7 @@ impl RearrangedChainExecutor {
                 .unwrap();
 
             // 3. Spawn the background task.
-            let upstream_poll_handle = madsim::task::spawn(Self::rearrange(
+            let upstream_poll_handle = tokio::spawn(Self::rearrange(
                 upstream,
                 upstream_tx,
                 rearranged_barrier_tx,
