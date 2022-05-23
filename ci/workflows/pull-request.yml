@@ -55,7 +55,7 @@ steps:
           run: rw-build-env
           config: ci/docker-compose.yml
       - joscha/codecov#v2.1.6: ~
-    timeout_in_minutes: 10
+    timeout_in_minutes: 15
 
   - label: "misc check"
     command: "ci/scripts/misc-check.sh"
@@ -65,5 +65,5 @@ steps:
           config: ci/docker-compose.yml
       - shellcheck#v1.2.0:
           files: ./**/*.sh
-    timeout_in_minutes: 10
+    timeout_in_minutes: 5
 
