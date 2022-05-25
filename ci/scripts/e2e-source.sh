@@ -3,6 +3,11 @@
 # Exits as soon as any line fails.
 set -euo pipefail
 
+echo "--- Download artifacts"
+buildkite-agent artifact download risingwave-dev target/debug/risingwave
+buildkite-agent artifact download risedev-playground-dev target/debug/risedev-playground
+buildkite-agent artifact download risingwave_regress_test-dev target/debug/risingwave_regress_test
+
 echo "--- Adjust permission"
 chmod +x ./target/debug/risingwave
 chmod +x ./target/debug/risedev-playground

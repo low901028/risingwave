@@ -3,6 +3,26 @@
 # Exits as soon as any line fails.
 set -euo pipefail
 
+while getopts 'p:' opt; do
+    case ${opt} in
+        p )
+            profile=$OPTARG
+            ;;
+        \? )
+            echo "Invalid Option: -$OPTARG" 1>&2
+            exit 1
+            ;;
+        : )
+            echo "Invalid option: $OPTARG requires an arguemnt" 1>&2
+            ;;
+    esac
+done
+shift $((OPTIND -1))
+
+echo "--- Download artifacts"
+buildkite-agent artifact download risingwave-"$profile" target/debug/risingwave
+buildkite-agent artifact download risedev-playground-"$profile" target/debug/risedev-playground
+
 echo "--- Adjust permission"
 chmod +x ./target/debug/risingwave
 chmod +x ./target/debug/risedev-playground
